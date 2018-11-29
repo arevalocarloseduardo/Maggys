@@ -3,6 +3,7 @@ package com.appsmaggys.caear.appfuentedesodamaggys
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -13,6 +14,7 @@ import android.view.View
 import android.widget.TextView
 import com.appmaggys.caear.appfuentedesodamaggys.R
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosUsuario
+import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.MenuFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedidosFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedirFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PerfilFragment
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
-import kotlinx.android.synthetic.main.content_menu.*
+
 
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -28,11 +30,10 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var pedirFragment: PedirFragment//Primer Caso para crear un fragment
     lateinit var pedidosFragment: PedidosFragment
     lateinit var perfilFragment: PerfilFragment
+    lateinit var menuFragment: MenuFragment
 
-    lateinit var referenciaUsuarios : DatabaseReference
-    lateinit var usuariosList:MutableList<DatosUsuario>
+
     lateinit var auth: FirebaseAuth
-    lateinit var txtWelcome: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,15 +41,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_menu)
         setSupportActionBar(toolbar)
 
-        val uid = FirebaseAuth.getInstance().uid
-        if(uid==null){
-            val intent = Intent(this, IntroActivity::class.java)
-           // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }else {
 
-
-            referenciaUsuarios = FirebaseDatabase.getInstance().getReference("Users")
+            /*referenciaUsuarios = FirebaseDatabase.getInstance().getReference("Users")
             usuariosList = mutableListOf()
 
             referenciaUsuarios.addValueEventListener(object : ValueEventListener {
@@ -66,15 +60,24 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             }
                         }
                         for (h in usuariosList) {
-                            txtWelcome.text = "Bienvenido " + h.nombre
+                            //txtWelcome.text = "Bienvenido " + h.nombre
                         }
                     }
                 }
-            })
+            })*/
             pedirFragment = PedirFragment.newInstance()//segundo Paso para crear un fragment
             pedidosFragment = PedidosFragment.newInstance()
             perfilFragment = PerfilFragment.newInstance()
-            txtWelcome = txtBien
+            menuFragment = MenuFragment.newInstance()
+
+            supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.contenedorFragments,menuFragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+
+
             val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
             )
@@ -82,8 +85,18 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             toggle.syncState()
 
             nav_view.setNavigationItemSelectedListener(this)
-        }
+
+
+
     }
+
+    private fun irFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.contenedorFragments,fragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()    }
+
 
     override fun onBackPressed() {
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
@@ -116,40 +129,11 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_camera -> {
-                txtWelcome.visibility= View.INVISIBLE
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments,perfilFragment)
-                    //.addToBackStack(PedidosFragment.toString())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-
-            }
-            R.id.nav_gallery -> {
-                txtWelcome.visibility= View.INVISIBLE
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments,pedirFragment)
-                    //.addToBackStack(PedidosFragment.toString())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-            }
-            R.id.nav_slideshow -> {
-                txtWelcome.visibility= View.INVISIBLE
-                supportFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.contenedorFragments,pedidosFragment)
-                    //.addToBackStack(PedidosFragment.toString())
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
+            R.id.nav_camera -> {irFragment(perfilFragment)}
+            R.id.nav_gallery -> {irFragment(pedirFragment)}
+            R.id.nav_slideshow -> { irFragment(pedidosFragment)}
+            R.id.nav_share -> {}
+            R.id.nav_send -> {}
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)

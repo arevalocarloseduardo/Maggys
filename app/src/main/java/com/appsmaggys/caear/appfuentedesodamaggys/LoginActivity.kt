@@ -33,6 +33,16 @@ class LoginActivity : AppCompatActivity() {
         btnEnviar.setOnClickListener {  loginUser()}
         btnreg.setOnClickListener { registrarte() }
 
+        val uid = FirebaseAuth.getInstance().uid
+        if(uid==null){
+            val intent = Intent(this, IntroActivity::class.java)
+            // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }else{val intent2 = Intent(this, MenuActivity::class.java)
+            // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent2)}
+
+
     }
 
     private fun registrarte() {
