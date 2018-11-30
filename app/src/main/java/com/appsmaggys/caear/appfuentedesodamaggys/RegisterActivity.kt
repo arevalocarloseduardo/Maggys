@@ -36,6 +36,17 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister = btn_signup
         sda=link_login
 
+        val uid = FirebaseAuth.getInstance().uid
+        if(uid==null){
+            val intent = Intent(this, IntroActivity::class.java)
+            // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }else{val intent2 = Intent(this, MenuActivity::class.java)
+            // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent2)}
+
+
+
         sda.setOnClickListener {
             startActivity((Intent(this,LoginActivity::class.java)))
         }

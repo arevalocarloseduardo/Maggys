@@ -66,8 +66,11 @@ class PerfilFragment : Fragment() {
     private fun traerDatos(referencia: DatabaseReference) {
         referencia.addValueEventListener(object : ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            }
+                val intent = Intent(activity, RegisterActivity::class.java)
+                intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+
+  }
 
             override fun onDataChange(p0: DataSnapshot) {
                 if(p0.exists()){

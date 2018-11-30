@@ -8,7 +8,6 @@ import com.appmaggys.caear.appfuentedesodamaggys.R
 import com.squareup.picasso.Picasso
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosMenuPrincipal
 import kotlinx.android.synthetic.main.menu_principal.view.*
-import kotlinx.android.synthetic.main.menus.view.*
 import java.lang.Exception
 
 class MenuPrincipalAdapter(var list: MutableList<DatosMenuPrincipal>): RecyclerView.Adapter<MenuPrincipalAdapter.ViewHolder>(){

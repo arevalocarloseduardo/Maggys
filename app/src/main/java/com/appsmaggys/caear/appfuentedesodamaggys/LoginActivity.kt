@@ -41,12 +41,10 @@ class LoginActivity : AppCompatActivity() {
         }else{val intent2 = Intent(this, MenuActivity::class.java)
             // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent2)}
-
-
     }
 
     private fun registrarte() {
-        val intent = Intent(this,RegisterActivity::class.java)
+        val intent = Intent(this,RegisterWhiteFacebook::class.java)
         startActivity(intent)
     }
 
