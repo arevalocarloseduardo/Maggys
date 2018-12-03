@@ -56,11 +56,12 @@ class RegisterWhiteFacebook : AppCompatActivity() {
             object : FacebookCallback<LoginResult>{
                 override fun onSuccess(result: LoginResult?) {
 
+                        card.visibility=View.VISIBLE
                         val intent2 = Intent(applicationContext, MenuActivity::class.java)
                         intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                         startActivity(intent2)
                         traerToken(result?.accessToken)
-
+                        card.visibility=View.GONE
 
                 }
                 override fun onCancel() {

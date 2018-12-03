@@ -131,7 +131,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_camera -> {irFragment(perfilFragment)}
+            R.id.nav_perfil -> {irFragment(perfilFragment)}
+            R.id.nav_camera -> {irFragment(menuFragment)}
             R.id.nav_gallery -> {irFragment(pedirFragment)}
             R.id.nav_slideshow -> { irFragment(pedidosFragment)}
             R.id.nav_share -> {}
