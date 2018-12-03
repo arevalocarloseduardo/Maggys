@@ -12,9 +12,13 @@ import android.widget.LinearLayout
 import com.appmaggys.caear.appfuentedesodamaggys.R
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosPedidos
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.AdaptadoresFragments.PedidosAdapter
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_pedidos.view.*
+import com.google.firebase.auth.FirebaseUser
+
+
 
 
 class PedidosFragment : Fragment() {
@@ -23,6 +27,7 @@ class PedidosFragment : Fragment() {
     lateinit var recyclerPedidos1: RecyclerView
 
     lateinit var auth: FirebaseAuth
+    lateinit var mAuth:FirebaseAuth
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -33,6 +38,8 @@ class PedidosFragment : Fragment() {
 
         val idClienteRegistrado=FirebaseAuth.getInstance().uid
         val btn_agregar=v.btnFragment
+
+
 
         recyclerPedidos1.layoutManager= LinearLayoutManager(activity, LinearLayout.VERTICAL,false)
         val mi2Adapter= PedidosAdapter(pedidosList1)

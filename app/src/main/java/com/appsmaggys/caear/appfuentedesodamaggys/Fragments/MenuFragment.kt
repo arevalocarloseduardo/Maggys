@@ -13,6 +13,7 @@ import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosMenuPrincipal
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.AdaptadoresFragments.MenuPrincipalAdapter
 import com.appsmaggys.caear.appfuentedesodamaggys.RecyclerAdapter
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.fragment_buttonfloating.*
 import kotlinx.android.synthetic.main.fragment_menu.*
 
 

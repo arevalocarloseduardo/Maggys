@@ -73,8 +73,14 @@ class PedirFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fab=fabPedir
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+
+            val frag2 = ButtonfloatingFragment()
+            fragmentManager
+                ?.beginTransaction()
+                ?.add(R.id.contenedorFragments,frag2)
+                ?.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                ?.commit()
+
         }
         recyclerImagenes1=rv_menus1
         recyclerImagenes2=rv_menus2
