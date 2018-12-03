@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           package="com.appmaggys.caear.appfuentedesodamaggys">
 
     <uses-permission android:name="android.permission.INTERNET"/>
-
 
     <application
             android:allowBackup="true"
@@ -18,51 +18,48 @@
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
-
-            <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen">
+        <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen">
         </activity>
-
         <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.RegisterActivity">
         </activity>
-
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.MenuActivity"
                 android:label="Fuente de Soda Maggy´s"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.ConfigurarCuentaActivity"
                 android:label="@string/title_activity_configurar_cuenta"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.IntroActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-
-        <activity
-                android:name="com.appsmaggys.caear.appfuentedesodamaggys.LoginActivity"
-                />
+        <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.LoginActivity"/>
 
         <meta-data
-                  tools:replace="android:value"
-                  android:name="com.facebook.sdk.ApplicationId"
-                  android:value="@string/facebook_app_id"/>
+                android:name="com.facebook.sdk.ApplicationId"
+                android:value="@string/facebook_app_id"
+                tools:replace="android:value"/>
 
-        <activity android:name="com.facebook.FacebookActivity"
-                  android:configChanges= "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-                  android:label="@string/app_name" />
-        <activity android:name="com.facebook.CustomTabActivity"
-                  android:exported="true">
+        <activity
+                android:name="com.facebook.FacebookActivity"
+                android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+                android:label="@string/app_name"/>
+        <activity
+                android:name="com.facebook.CustomTabActivity"
+                android:exported="true">
         </activity>
-
+        <activity
+                android:name=".PedirFrag"
+                android:label="@string/title_activity_pedir_frag"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
-
 
 </manifest>
