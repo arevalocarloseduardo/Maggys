@@ -27,7 +27,6 @@ class IntroActivity : AppIntro() {
        //setVibrate(true)
        //setVibrateIntensity(30)
         setDoneText("Listo!")
-
     }
 
    override fun onDonePressed(currentFragment: Fragment) {

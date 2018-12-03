@@ -12,39 +12,43 @@
             android:roundIcon="@mipmap/ic_launcher_maggyfuen"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
-
         <activity
-                android:name="com.appsmaggys.caear.appfuentedesodamaggys.LoginActivity"
+                android:name="com.appsmaggys.caear.appfuentedesodamaggys.RegisterWhiteFacebook"
+                android:label="@string/title_activity_register_white_facebook"
                 android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen">
+
+
+            <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen">
         </activity>
+
         <activity android:name="com.appsmaggys.caear.appfuentedesodamaggys.RegisterActivity">
         </activity>
+
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.MenuActivity"
                 android:label="Fuente de Soda Maggy´s"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.ConfigurarCuentaActivity"
                 android:label="@string/title_activity_configurar_cuenta"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.IntroActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+
         <activity
-                android:name="com.appsmaggys.caear.appfuentedesodamaggys.RegisterWhiteFacebook"
-                android:label="@string/title_activity_register_white_facebook"
-                android:theme="@style/AppTheme.NoActionBar"/>
+                android:name="com.appsmaggys.caear.appfuentedesodamaggys.LoginActivity"
+                />
 
         <meta-data
                   tools:replace="android:value"

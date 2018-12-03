@@ -18,6 +18,8 @@ import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.MenuFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedidosFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedirFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PerfilFragment
+import com.google.firebase.auth.FacebookAuthCredential
+import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_menu.*
