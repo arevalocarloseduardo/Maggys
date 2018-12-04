@@ -14,6 +14,14 @@ import com.facebook.login.widget.LoginButton
 import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_register_white_facebook.*
 import java.util.*
+import android.content.pm.PackageManager
+import android.content.pm.PackageInfo
+import android.util.Log
+import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosUsuario
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class RegisterWhiteFacebook : AppCompatActivity() {
@@ -22,20 +30,41 @@ class RegisterWhiteFacebook : AppCompatActivity() {
     lateinit var auth: FirebaseAuth
     lateinit var user: FirebaseUser
     lateinit var text:TextView
+    lateinit var dbRefernce: DatabaseReference
+    lateinit var database:FirebaseDatabase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register_white_facebook)
 
+        try {
+            val info = packageManager.getPackageInfo(
+                "com.appmaggys.caear.appfuentedesodamaggys",
+                PackageManager.GET_SIGNATURES
+            )
+            for (signature in info.signatures) {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+
+        } catch (e: NoSuchAlgorithmException) {
+
+        }
+
+        database= FirebaseDatabase.getInstance()
+        dbRefernce=database.reference.child("User")
+
+
         val uid = FirebaseAuth.getInstance().uid
         if(uid==null){
-            val intent = Intent(this, IntroActivity::class.java)
+            val intenti = Intent(this, IntroActivity::class.java)
             // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }else{val intent2 = Intent(this, MenuActivity::class.java)
+            startActivity(intenti)
+        }else{val intenti2 = Intent(this, MenuActivity::class.java)
             // intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent2)}
+            startActivity(intenti2)}
 
        // text = txtIniciar
 
@@ -55,13 +84,14 @@ class RegisterWhiteFacebook : AppCompatActivity() {
             LoginManager.getInstance().registerCallback(callBackManager,
             object : FacebookCallback<LoginResult>{
                 override fun onSuccess(result: LoginResult?) {
-
                         card.visibility=View.VISIBLE
-                        val intent2 = Intent(applicationContext, MenuActivity::class.java)
-                        intent.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                        startActivity(intent2)
+                        val intentio2 = Intent(applicationContext, MenuActivity::class.java)
+                        intentio2.flags= Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intentio2)
                         traerToken(result?.accessToken)
+
                         card.visibility=View.GONE
+                    finish()
 
                 }
                 override fun onCancel() {
@@ -81,9 +111,6 @@ class RegisterWhiteFacebook : AppCompatActivity() {
 
         }
 
-
-
-
     private fun traerToken(accessToken: AccessToken?) {
         var credential = FacebookAuthProvider.getCredential(accessToken!!.token)
 
@@ -93,12 +120,12 @@ class RegisterWhiteFacebook : AppCompatActivity() {
             if (task.isSuccessful){
                 var myuserobj = auth.currentUser
                 updateUI(myuserobj)
+
             }else{
 
                 Toast.makeText(this,"error en la autentificacion",Toast.LENGTH_LONG).show()
             }
         }
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -107,8 +134,16 @@ class RegisterWhiteFacebook : AppCompatActivity() {
     }
 
     private fun updateUI(myuserobj: FirebaseUser?) {
-    //   text.text= myuserobj?.email
-
+        /*
+        val nombre = myuserobj?.displayName.toString()
+        val imagen = myuserobj?.photoUrl.toString()
+        val telefono = myuserobj?.phoneNumber.toString()
+        val correo = myuserobj?.email.toString()
+        val uid = auth.uid //guardo en uid la autentificacion
+        val ref = FirebaseDatabase.getInstance().getReference("/Users/$uid")//carlos= $uid creo una base de datos re piola
+        val user = DatosUsuario(uid!!,nombre,imagen,"edad",correo,telefono,"0","1","Ninguna")//guardo la imagen y
+        ref.setValue(user)
+*/
     }
 
 }

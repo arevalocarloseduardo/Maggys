@@ -56,16 +56,6 @@ class PedirFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        verifivarAuth()
-    }
-
-    private fun verifivarAuth() {
-        val uid = FirebaseAuth.getInstance().uid
-        if(uid==null){
-            val intent = Intent(activity, RegisterActivity::class.java)
-            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
-        }
     }
 
 
