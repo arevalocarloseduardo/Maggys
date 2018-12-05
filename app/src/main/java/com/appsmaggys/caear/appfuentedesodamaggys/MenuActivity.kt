@@ -1,5 +1,6 @@
 package com.appsmaggys.caear.appfuentedesodamaggys
 
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.NavigationView
@@ -18,6 +19,7 @@ import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.MenuFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedidosFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedirFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PerfilFragment
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FacebookAuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -33,6 +35,9 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var pedidosFragment: PedidosFragment
     lateinit var perfilFragment: PerfilFragment
     lateinit var menuFragment: MenuFragment
+    lateinit var referenciaUsuarios:DatabaseReference
+    lateinit var usuariosList:MutableList<DatosUsuario>
+    lateinit var tituloToolbar:TextView
 
 
     lateinit var auth: FirebaseAuth
@@ -41,10 +46,21 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+
+        auth=FirebaseAuth.getInstance()
+        var myuserobj = auth.currentUser
+
+        val nombre = myuserobj?.displayName.toString()
+        toolbar.setTitle(nombre)
         setSupportActionBar(toolbar)
 
 
-            /*referenciaUsuarios = FirebaseDatabase.getInstance().getReference("Users")
+
+
+
+
+            referenciaUsuarios = FirebaseDatabase.getInstance().getReference("Users")
             usuariosList = mutableListOf()
 
             referenciaUsuarios.addValueEventListener(object : ValueEventListener {
@@ -62,11 +78,12 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                             }
                         }
                         for (h in usuariosList) {
-                            //txtWelcome.text = "Bienvenido " + h.nombre
+                           toolbar.subtitle = "Pts:"+h.puntos
+
                         }
                     }
                 }
-            })*/
+            })
             pedirFragment = PedirFragment.newInstance()//segundo Paso para crear un fragment
             pedidosFragment = PedidosFragment.newInstance()
             perfilFragment = PerfilFragment.newInstance()
@@ -119,9 +136,10 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (item.itemId) {
             R.id.action_settings ->  {
                 var firse = FirebaseAuth.getInstance()
+                LoginManager.getInstance().logOut()
                 firse.signOut()
                 finish()
-                startActivity(Intent(this,LoginActivity::class.java))
+                startActivity(Intent(this,RegisterWhiteFacebook::class.java))
             }
 
         }

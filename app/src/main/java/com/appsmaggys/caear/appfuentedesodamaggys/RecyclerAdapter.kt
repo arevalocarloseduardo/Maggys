@@ -10,11 +10,13 @@ import com.google.firebase.database.FirebaseDatabase
 import com.squareup.picasso.Picasso
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosPedidos
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosImagenes
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.menus.view.*
 import java.lang.Exception
 
 class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
         val v = LayoutInflater.from(parent.context).inflate(R.layout.menus,parent,false)
     return ViewHolder(v)
     }
@@ -26,13 +28,19 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
     }
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
+        lateinit var auth: FirebaseAuth
         fun bindItems(data: DatosImagenes){
             val checkBox1 = itemView.cbLLevarMenu
             val cant =itemView.edCant
             val btn=itemView.btn_agregarMenu
             val text = data.mimageUrl
+            auth= FirebaseAuth.getInstance()
+            var myuserobj = auth.currentUser
 
+            val nombre = myuserobj?.displayName.toString()
+            cant.setText("1")
             btn.setOnClickListener {
+
 
                 var paraLlevar: String
                 paraLlevar = if (checkBox1.isChecked) "Para LLevar"
@@ -44,8 +52,9 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
 
                 val heroId = referenciaPedidos.push().key.toString()
                 if (cant.text.isNotEmpty()){
-                    val hero = DatosPedidos(heroId,"",data.mName,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
+                    val hero = DatosPedidos(heroId,nombre,data.mName,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
                     referenciaPedidos.child(heroId).setValue(hero)
+                    Toast.makeText(itemView.context,"agregaste:${cant.text}",Toast.LENGTH_SHORT).show()
                 }
         }
             itemView.progressBarMenu.visibility = View.VISIBLE

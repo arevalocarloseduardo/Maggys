@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#2a849f"
                 android:orientation="vertical"
                 android:scrollbarAlwaysDrawVerticalTrack="true">
 
@@ -13,8 +12,8 @@
             android:layout_marginBottom="16dp"
             android:layout_marginTop="22dp"
             android:gravity="center_horizontal"
-            android:text="Ingresá una Cuenta"
-            android:textColor="#fff"
+            android:text="Configurar Datos"
+            android:textColor="@color/colorAccent"
             android:textSize="26sp"
             android:textStyle="bold"/>
 
@@ -36,19 +35,6 @@
                 android:orientation="vertical"
                 android:paddingTop="30dp">
 
-            <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="45dp"
-                        android:drawableLeft="@mipmap/ic_launcher_nombre"
-                        android:drawableTint="#2a849f"
-                        android:singleLine="true"
-                        android:hint="Nombre"
-                        android:inputType="textEmailAddress" android:id="@+id/tiNombre"/>
-            </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -97,5 +83,5 @@
             android:layout_alignParentStart="true" android:layout_marginStart="0dp"
             android:layout_alignParentTop="true" android:id="@+id/progressBarLog" android:layout_marginTop="0dp"
             tools:visibility="gone"
-            android:indeterminate="true"/>
+            android:indeterminate="true" android:visibility="gone"/>
 </RelativeLayout>
