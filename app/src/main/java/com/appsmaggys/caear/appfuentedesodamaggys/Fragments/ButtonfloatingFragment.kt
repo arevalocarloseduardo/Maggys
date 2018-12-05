@@ -39,7 +39,7 @@ class ButtonfloatingFragment : Fragment() {
             for (h in pedidosList){
                 val heroId =  FirebaseAuth.getInstance().uid.toString()
                 val heros = referenciaPedidos.push().key.toString()
-                val hero = DatosPedidos(heroId,"",h.menu,h.llevar,h.cant,h.precio,heros,"A confirmar","","","","","")
+                val hero = DatosPedidos(heroId,h.cliente,h.menu,h.llevar,h.cant,h.precio,heros,"A confirmar","","","","","")
                 referenciaConfirmados.child(heros).setValue(hero)
             }
                 referenciaPedidos.removeValue()
