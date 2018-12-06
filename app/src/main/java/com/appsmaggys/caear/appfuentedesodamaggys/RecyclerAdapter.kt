@@ -1,5 +1,7 @@
 package com.appsmaggys.caear.appfuentedesodamaggys
 
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosImagenes
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.menus.view.*
 import java.lang.Exception
+import java.util.*
 
 class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapter<RecyclerAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -29,6 +32,7 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
         lateinit var auth: FirebaseAuth
+        @RequiresApi(Build.VERSION_CODES.O)
         fun bindItems(data: DatosImagenes){
             val checkBox1 = itemView.cbLLevarMenu
             val cant =itemView.edCant
@@ -37,6 +41,7 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
             val btnM=itemView.btnMenos
             val btnMa=itemView.btnMas
             val card = itemView.cardBtn
+
 
             auth= FirebaseAuth.getInstance()
             var myuserobj = auth.currentUser
@@ -68,8 +73,12 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
                 paraLlevar = if (checkBox1.isChecked) "Para LLevar"
                 else ""
                 val referenciaPedidos = FirebaseDatabase.getInstance().getReference("Pedidos")
-                val fecha ="17/07/2018"
-                val hora = "20:20"
+
+
+                val fecha =Calendar.getInstance().time.toString()
+                val hora = Calendar.getInstance().timeInMillis.toString()
+
+
                 val heroId = referenciaPedidos.push().key.toString()
                 if (cant.text.isNotEmpty()){
                     val hero = DatosPedidos(heroId,nombre,data.mName,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
