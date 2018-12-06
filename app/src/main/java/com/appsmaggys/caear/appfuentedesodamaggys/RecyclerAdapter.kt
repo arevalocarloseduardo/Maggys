@@ -34,27 +34,49 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
             val cant =itemView.edCant
             val btn=itemView.btn_agregarMenu
             val text = data.mimageUrl
+            val btnM=itemView.btnMenos
+            val btnMa=itemView.btnMas
+            val card = itemView.cardBtn
+
             auth= FirebaseAuth.getInstance()
             var myuserobj = auth.currentUser
 
             val nombre = myuserobj?.displayName.toString()
             cant.setText("1")
+            var cantidad=1
+
+            btnMa.setOnClickListener {
+
+                val canti=cant.text.toString().toInt()
+                cantidad= canti+1
+
+                cant.setText(cantidad.toString())
+
+            }
+            btnM.setOnClickListener {
+
+                val canti=cant.text.toString().toInt()
+                if(canti>1){
+                    cantidad=canti-1
+                    cant.setText(cantidad.toString())
+                }
+
+            }
+
             btn.setOnClickListener {
-
-
                 var paraLlevar: String
                 paraLlevar = if (checkBox1.isChecked) "Para LLevar"
                 else ""
                 val referenciaPedidos = FirebaseDatabase.getInstance().getReference("Pedidos")
-
                 val fecha ="17/07/2018"
                 val hora = "20:20"
-
                 val heroId = referenciaPedidos.push().key.toString()
                 if (cant.text.isNotEmpty()){
                     val hero = DatosPedidos(heroId,nombre,data.mName,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
                     referenciaPedidos.child(heroId).setValue(hero)
                     Toast.makeText(itemView.context,"agregaste:${cant.text}",Toast.LENGTH_SHORT).show()
+                    cant.setText("1")
+                    cantidad=1
                 }
         }
             itemView.progressBarMenu.visibility = View.VISIBLE

@@ -122,8 +122,6 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
             .commit()
 
-
-
             val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
             )
@@ -131,9 +129,6 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             toggle.syncState()
 
             nav_view.setNavigationItemSelectedListener(this)
-
-
-
     }
 
     private fun irFragment(fragment: Fragment) {
@@ -201,12 +196,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
-
     }
 
-    private fun marcarSeleccionado(s: String) {
-
-    }
     fun BottomNavigationView.desactivarMovimiento() {
         val menuView = getChildAt(0) as BottomNavigationMenuView
 
