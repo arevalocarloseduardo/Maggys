@@ -201,6 +201,7 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+
     }
 
     private fun marcarSeleccionado(s: String) {
