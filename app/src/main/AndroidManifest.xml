@@ -12,7 +12,6 @@
             android:roundIcon="@mipmap/ic_launcher_maggyfuen"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
         <activity
                 android:name="com.appsmaggys.caear.appfuentedesodamaggys.RegisterWhiteFacebook"
                 android:label="Maggy´s"
@@ -56,12 +55,32 @@
                 android:name="com.facebook.CustomTabActivity"
                 android:exported="true">
             <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="@string/fb_login_protocol_scheme" /> </intent-filter>
-    </activity>
+                <action android:name="android.intent.action.VIEW"/>
 
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+        </activity>
+        <activity
+                android:name="com.appsmaggys.caear.appfuentedesodamaggys.BottomActivity"
+                android:label="@string/title_activity_bottom"
+                android:parentActivityName="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen"/>
+        </activity>
+        <activity
+                android:name="com.appsmaggys.caear.appfuentedesodamaggys.ScrollingActivity"
+                android:label="@string/title_activity_scrolling"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+                android:name="com.appsmaggys.caear.appfuentedesodamaggys.TabsActivity"
+                android:label="@string/title_activity_tabs"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

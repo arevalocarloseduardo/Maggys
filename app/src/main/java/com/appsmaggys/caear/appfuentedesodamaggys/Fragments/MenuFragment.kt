@@ -22,9 +22,6 @@ class MenuFragment : Fragment() {
     lateinit var imagenList:MutableList<DatosMenuPrincipal>
     lateinit var recyclerImagenes: RecyclerView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

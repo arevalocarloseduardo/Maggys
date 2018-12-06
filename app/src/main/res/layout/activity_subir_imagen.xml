@@ -8,11 +8,12 @@
         tools:context="com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen" tools:layout_editor_absoluteY="81dp">
 
     <Button
-            android:text="Button"
+            android:text="seleccionar imagen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/mbutton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@+id/meditText"/>
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,8 +21,8 @@
             android:text="Name"
             android:ems="10"
             android:id="@+id/meditText"
-            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="94dp"
-            android:layout_marginStart="20dp" app:layout_constraintStart_toEndOf="@+id/mbutton"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="32dp" app:layout_constraintStart_toEndOf="@+id/mbutton"/>
     <ProgressBar
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="0dp"
@@ -32,7 +33,7 @@
             app:layout_constraintHorizontal_bias="1.0" android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toTopOf="@+id/mbutton2"/>
     <Button
-            android:text="Button"
+            android:text="subir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:id="@+id/mbutton2"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,10 +46,44 @@
             app:layout_constraintBaseline_toBaselineOf="@+id/mbutton2" android:layout_marginStart="29dp"
             app:layout_constraintStart_toEndOf="@+id/mbutton2"/>
     <ImageView
-            android:layout_width="0dp"
-            android:layout_height="0dp" app:srcCompat="@android:color/holo_blue_dark"
+            android:layout_width="125dp"
+            android:layout_height="94dp" app:srcCompat="@android:color/holo_blue_dark"
             android:id="@+id/mimageView" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp" app:layout_constraintBottom_toTopOf="@+id/mprogressBar"
-            android:layout_marginTop="8dp" app:layout_constraintTop_toBottomOf="@+id/meditText"/>
+    />
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edtCategory"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp" android:hint="Categoria" android:layout_marginTop="56dp"
+            app:layout_constraintTop_toTopOf="parent"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edtNombrePro" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/edtCategory" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:hint="Nombre Producto"
+            android:layout_marginBottom="8dp" app:layout_constraintBottom_toTopOf="@+id/edtPrecio"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            tools:layout_editor_absoluteY="172dp" tools:layout_editor_absoluteX="8dp" android:id="@+id/edtPrecio"
+            android:hint="Precio"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/edtDesc" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/edtPrecio" android:layout_marginStart="8dp"
+            app:layout_constraintStart_toStartOf="parent" android:hint="Descripción" android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/mimageView" app:layout_constraintVertical_bias="0.113"/>
 </android.support.constraint.ConstraintLayout>

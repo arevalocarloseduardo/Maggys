@@ -1,8 +1,11 @@
 package com.appsmaggys.caear.appfuentedesodamaggys
 
-import android.content.ClipData
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.support.design.internal.BottomNavigationItemView
+import android.support.design.internal.BottomNavigationMenuView
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.NavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentTransaction
@@ -11,7 +14,6 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import com.appmaggys.caear.appfuentedesodamaggys.R
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosUsuario
@@ -20,14 +22,12 @@ import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedidosFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PedirFragment
 import com.appsmaggys.caear.appfuentedesodamaggys.Fragments.PerfilFragment
 import com.facebook.login.LoginManager
-import com.google.firebase.auth.FacebookAuthCredential
-import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import kotlinx.android.synthetic.main.activity_bottom.*
 import kotlinx.android.synthetic.main.activity_menu.*
 import kotlinx.android.synthetic.main.app_bar_menu.*
-
-
+import kotlinx.android.synthetic.main.content_menu.*
 
 class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,13 +40,38 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var tituloToolbar:TextView
 
 
+
     lateinit var auth: FirebaseAuth
+
+    private val mOnNavigationItemSelectedListener= BottomNavigationView.OnNavigationItemSelectedListener { item ->
+
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                irFragment(menuFragment)
+
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+                irFragment(pedirFragment)
+
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                irFragment(pedidosFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_perfil -> {
+                irFragment(perfilFragment)
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
 
         auth=FirebaseAuth.getInstance()
         var myuserobj = auth.currentUser
@@ -55,6 +80,8 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toolbar.setTitle(nombre)
         setSupportActionBar(toolbar)
 
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        navigation.desactivarMovimiento()
 
 
 
@@ -149,15 +176,51 @@ class MenuActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
-            R.id.nav_perfil -> {irFragment(perfilFragment)}
-            R.id.nav_camera -> {irFragment(menuFragment)}
-            R.id.nav_gallery -> {irFragment(pedirFragment)}
-            R.id.nav_slideshow -> { irFragment(pedidosFragment)}
+            R.id.nav_perfil -> {
+                irFragment(perfilFragment)
+                navigation.selectedItemId=R.id.navigation_perfil
+     }
+            R.id.nav_camera -> {
+                irFragment(menuFragment)
+
+                navigation.selectedItemId=R.id.navigation_home
+            }
+            R.id.nav_gallery -> {
+                irFragment(pedirFragment)
+
+                navigation.selectedItemId=R.id.navigation_dashboard
+            }
+            R.id.nav_slideshow -> {
+                irFragment(pedidosFragment)
+
+                navigation.selectedItemId=R.id.navigation_notifications
+            }
             R.id.nav_share -> {}
             R.id.nav_send -> {}
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun marcarSeleccionado(s: String) {
+
+    }
+    fun BottomNavigationView.desactivarMovimiento() {
+        val menuView = getChildAt(0) as BottomNavigationMenuView
+
+        menuView.javaClass.getDeclaredField("mShiftingMode").apply {
+            isAccessible = true
+            setBoolean(menuView, false)
+            isAccessible = false
+        }
+
+        @SuppressLint("RestrictedApi")
+        for (i in 0 until menuView.childCount) {
+            (menuView.getChildAt(i) as BottomNavigationItemView).apply {
+                setShiftingMode(false)
+                setChecked(false)
+            }
+        }
     }
 }

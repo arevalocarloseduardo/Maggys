@@ -14,6 +14,7 @@ import com.appmaggys.caear.appfuentedesodamaggys.R
 import com.appsmaggys.caear.appfuentedesodamaggys.ConfigurarCuentaActivity
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosUsuario
 import com.appsmaggys.caear.appfuentedesodamaggys.RegisterActivity
+import com.appsmaggys.caear.appfuentedesodamaggys.SubirImagen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
@@ -33,6 +34,7 @@ class PerfilFragment : Fragment() {
     lateinit var direccion :TextView
     lateinit var nombreFc:TextView
     lateinit var imagfc:ImageView
+    lateinit var btnAgre:Button
 
     lateinit var btnConfigurar: Button
     var hayDatos:Boolean = false
@@ -68,8 +70,11 @@ class PerfilFragment : Fragment() {
     telefono = v.tvPerfilTelefono
     direccion = v.tvPerfilDireccion
     btnConfigurar = v.btnPerfilConfigurar
-
+        btnAgre=v.btnAgregarPhoto
     verPuntos(referenciaUsuarios)
+
+
+        btnAgre.setOnClickListener {  startActivity(Intent(activity, SubirImagen::class.java))}
 
     btnConfigurar.setOnClickListener { enviarFragment() }
 

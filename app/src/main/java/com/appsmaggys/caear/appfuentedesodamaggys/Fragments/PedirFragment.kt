@@ -20,6 +20,9 @@ import com.appsmaggys.caear.appfuentedesodamaggys.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.fragment_pedir.*
+import com.google.firebase.database.FirebaseDatabase
+
+
 
 class PedirFragment : Fragment() {
 
@@ -88,6 +91,10 @@ class PedirFragment : Fragment() {
         imagenList6= mutableListOf()
         imagenList7= mutableListOf()
         imagenList8= mutableListOf()
+//        FirebaseDatabase.getInstance().setPersistenceEnabled(true)
+  //      val presenceRef = FirebaseDatabase.getInstance().getReference("disconnectmessage")
+    //    presenceRef.onDisconnect().setValue("I disconnected!")
+
 
         referenciaImagenes1 = FirebaseDatabase.getInstance().getReference("menus")
         referenciaImagenes2 = FirebaseDatabase.getInstance().getReference("combos")

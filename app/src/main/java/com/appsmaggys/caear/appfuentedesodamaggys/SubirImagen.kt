@@ -10,7 +10,6 @@ import android.util.Log
 
 import android.widget.*
 import com.appmaggys.caear.appfuentedesodamaggys.R
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -26,9 +25,15 @@ class SubirImagen : AppCompatActivity() {
     lateinit var mBar: ProgressBar
     lateinit var mImagen: ImageView
     lateinit var mEditText: EditText
+    lateinit var mCate: EditText
+    lateinit var mNombr: EditText
+    lateinit var mPrec: EditText
+    lateinit var mDesc: EditText
     lateinit var mTextView: TextView
     lateinit var mStorage:StorageReference
     lateinit var mDatabaseReference: DatabaseReference
+
+
     var selectedPhotoUrl :Uri? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +49,10 @@ class SubirImagen : AppCompatActivity() {
         mImagen=mimageView
         mEditText=meditText
         mTextView=mtextView
+        mCate=edtCategory
+        mNombr=edtNombrePro
+        mPrec=edtPrecio
+        mDesc=edtDesc
 
         mButtonUpload.setOnClickListener {
             subirImagenAFirebase()
@@ -64,19 +73,24 @@ class SubirImagen : AppCompatActivity() {
                 Log.d("tag", "yape:${it.metadata?.path}")
                 ref.downloadUrl.addOnSuccessListener {
                     Log.d("tag", "yase:$it")
+                   val categor= mCate.text.toString()
+                    val nombreP= mNombr.text.toString()
+                    val prec= mPrec.text.toString()
+                    val descri= mDesc.text.toString()
 
-                salvarUsuarioFirebase(it.toString())
+                salvarUsuarioFirebase(it.toString(),categor,nombreP,prec,descri)
                     Picasso.get().load(it.toString()).into(mImagen)
             }}
                .addOnFailureListener {//obtengo la direccion de la imagen subida a firebase y se la mando a la funcion
                }
     }
 
-    private fun salvarUsuarioFirebase(imagenUrl:String) //recibo la direccion de la imagen
+    private fun salvarUsuarioFirebase(imagenUrl: String,categoria: String,nombreProducto: String,precio: String,descripcion: String
+    ) //recibo la direccion de la imagen
     {
-        val uid = FirebaseAuth.getInstance().uid ?:""//guardo en uid la autentificacion
-        val ref = FirebaseDatabase.getInstance().getReference("/usuarios/$uid")//carlos= $uid creo una base de datos re piola
-        val user = DatosImagenes("Carlos", "nombre", imagenUrl, "", "")//guardo la imagen y
+
+        val ref = FirebaseDatabase.getInstance().getReference("/$categoria/$nombreProducto")//carlos= $uid creo una base de datos re piola
+        val user = DatosImagenes("Carlos", nombreProducto, imagenUrl, precio, descripcion)//guardo la imagen y
         ref.setValue(user)
     }
 
