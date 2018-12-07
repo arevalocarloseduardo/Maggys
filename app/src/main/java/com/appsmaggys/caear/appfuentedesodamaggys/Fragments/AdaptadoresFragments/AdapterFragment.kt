@@ -9,6 +9,7 @@ import com.appmaggys.caear.appfuentedesodamaggys.R
 
 import com.google.firebase.database.FirebaseDatabase
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosPedidos
+import com.google.firebase.auth.FirebaseAuth
 
 import kotlinx.android.synthetic.main.datos.view.*
 
@@ -40,7 +41,9 @@ class AdapterFragment(var list: MutableList<DatosPedidos>): RecyclerView.Adapter
             }
         }
         private fun deleteInfo(data: DatosPedidos) {
-            val myBaseDeDatos = FirebaseDatabase.getInstance().getReference("Pedidos")
+
+            val uid=FirebaseAuth.getInstance().uid
+            val myBaseDeDatos = FirebaseDatabase.getInstance().getReference(uid!!)
             myBaseDeDatos.child(data.id).removeValue()
         }
     }

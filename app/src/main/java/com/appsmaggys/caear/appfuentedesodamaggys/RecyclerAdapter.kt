@@ -26,6 +26,7 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
     override fun getItemCount(): Int {
         return list.size
     }
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: RecyclerAdapter.ViewHolder, position: Int) {
         holder.bindItems(list[position])
     }
@@ -72,7 +73,8 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
                 var paraLlevar: String
                 paraLlevar = if (checkBox1.isChecked) "Para LLevar"
                 else ""
-                val referenciaPedidos = FirebaseDatabase.getInstance().getReference("Pedidos")
+                val uid=auth.uid
+                val referenciaPedidos = FirebaseDatabase.getInstance().getReference(uid!!)
 
 
                 val fecha =Calendar.getInstance().time.toString()
@@ -81,9 +83,9 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
 
                 val heroId = referenciaPedidos.push().key.toString()
                 if (cant.text.isNotEmpty()){
-                    val hero = DatosPedidos(heroId,nombre,data.mName,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
+                    val hero = DatosPedidos(heroId,nombre,data.mname,paraLlevar,cant.text.toString().trim(),data.precio,"","","","","",hora,fecha)
                     referenciaPedidos.child(heroId).setValue(hero)
-                    Toast.makeText(itemView.context,"agregaste:${cant.text}",Toast.LENGTH_SHORT).show()
+                    Toast.makeText(itemView.context,"agregaste:${cant.text}${data.mname}",Toast.LENGTH_SHORT).show()
                     cant.setText("1")
                     cantidad=1
                 }

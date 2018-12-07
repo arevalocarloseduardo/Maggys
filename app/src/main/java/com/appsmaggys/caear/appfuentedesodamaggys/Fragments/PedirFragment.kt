@@ -56,6 +56,7 @@ class PedirFragment : Fragment() {
     lateinit var recyclerImagenes8: RecyclerView
 
     lateinit var fab :FloatingActionButton
+    lateinit var auth:FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,7 +96,8 @@ class PedirFragment : Fragment() {
   //      val presenceRef = FirebaseDatabase.getInstance().getReference("disconnectmessage")
     //    presenceRef.onDisconnect().setValue("I disconnected!")
 
-
+        auth= FirebaseAuth.getInstance()
+        val uid= auth.uid
         referenciaImagenes1 = FirebaseDatabase.getInstance().getReference("menus")
         referenciaImagenes2 = FirebaseDatabase.getInstance().getReference("combos")
         referenciaImagenes3 = FirebaseDatabase.getInstance().getReference("postres")
@@ -106,7 +108,7 @@ class PedirFragment : Fragment() {
         referenciaImagenes8 = FirebaseDatabase.getInstance().getReference("sandwiches")
 
 
-        referenciaPedidos = FirebaseDatabase.getInstance().getReference("Pedidos")
+        referenciaPedidos = FirebaseDatabase.getInstance().getReference(uid!!)
         referenciaConfirmados = FirebaseDatabase.getInstance().getReference("Confirmados")
 
         recyclerImagenes1.layoutManager=LinearLayoutManager(activity,LinearLayout.HORIZONTAL,false)

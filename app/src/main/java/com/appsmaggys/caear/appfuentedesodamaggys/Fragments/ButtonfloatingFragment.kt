@@ -25,6 +25,7 @@ class ButtonfloatingFragment : Fragment() {
     lateinit var pedidosList:MutableList<DatosPedidos>
     lateinit var referenciaPedidos : DatabaseReference
     lateinit var referenciaConfirmados : DatabaseReference
+    lateinit var auth: FirebaseAuth
     lateinit var fab : FloatingActionButton
     lateinit var btn : Button
     var precioTotal=0
@@ -63,13 +64,15 @@ class ButtonfloatingFragment : Fragment() {
         recyclerPedidos=recyclerPedidi
         pedidosList= mutableListOf()
 
-
+        auth= FirebaseAuth.getInstance()
+        val uid=auth.uid
 
         recyclerPedidos.layoutManager= LinearLayoutManager(activity, LinearLayout.VERTICAL,false)
         val mi2Adapter= AdapterFragment(pedidosList)
         recyclerPedidos.adapter =mi2Adapter
 
-        referenciaPedidos = FirebaseDatabase.getInstance().getReference("Pedidos")
+
+        referenciaPedidos = FirebaseDatabase.getInstance().getReference(uid!!)
 
         fab=fabSal
         fab.setOnClickListener { view ->
