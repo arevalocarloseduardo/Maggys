@@ -42,14 +42,17 @@ class RecyclerAdapter(var list: MutableList<DatosImagenes>): RecyclerView.Adapte
             val btnM=itemView.btnMenos
             val btnMa=itemView.btnMas
             val card = itemView.cardBtn
+            val txprecio    =itemView.txtPrecio
 
 
             auth= FirebaseAuth.getInstance()
             var myuserobj = auth.currentUser
 
+
             val nombre = myuserobj?.displayName.toString()
             cant.setText("1")
             var cantidad=1
+            txprecio.text=data.precio
 
             btnMa.setOnClickListener {
 

@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.appmaggys.caear.appfuentedesodamaggys.R
-import com.squareup.picasso.Picasso
 import com.appsmaggys.caear.appfuentedesodamaggys.Datos.DatosMenuPrincipal
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.menu_principal.view.*
-import java.lang.Exception
+
 
 class MenuPrincipalAdapter(var list: MutableList<DatosMenuPrincipal>): RecyclerView.Adapter<MenuPrincipalAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

@@ -14,38 +14,46 @@
 
         <ImageView
                 android:layout_width="400dp"
-                android:layout_height="200dp" app:srcCompat="@android:color/holo_blue_bright"
+                android:layout_height="198dp" app:srcCompat="@android:color/holo_blue_bright"
                 android:id="@+id/imagenMenu"
                 app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
         <CheckBox
                 android:text="LLevar"
-                android:layout_width="0dp"
-                android:layout_height="28dp"
+                android:layout_width="78dp"
+                android:layout_height="22dp"
                 android:id="@+id/cbLLevarMenu"
-                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
-                android:visibility="visible"/>
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/cardBtn"
+                android:layout_marginStart="5dp" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"/>
         <Button
                 android:text="Agregar"
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="39dp"
                 android:id="@+id/btn_agregarMenu"
                 style="@style/Widget.AppCompat.Button.Colored"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
         />
+        <TextView
+                android:text="57"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txtPrecio"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" android:textStyle="bold"
+                android:textColor="@color/fui_bgFacebook"/>
         <android.support.v7.widget.CardView
-                android:layout_width="81dp"
-                android:layout_height="35dp"
+                android:layout_width="76dp"
+                android:layout_height="27dp"
                 app:cardCornerRadius="4dp"
                 app:cardElevation="5dp"
                 android:visibility="visible" android:id="@+id/cardBtn"
                 app:layout_constraintStart_toEndOf="@+id/btn_agregarMenu"
-                android:layout_marginStart="8dp" android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/cbLLevarMenu"
+                android:layout_marginStart="5dp"
                 app:cardBackgroundColor="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="parent">
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="5dp">
             <android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
